@@ -5,6 +5,7 @@ from PIL import Image
 import math
 import time
 import os
+import random
 
 def pull_screenshot():
     os.system('adb shell screencap -p /sdcard/autojump.png')
@@ -13,7 +14,11 @@ def pull_screenshot():
 def jump(distance):
     press_time = distance * 1.35
     press_time = int(press_time)
-    cmd = 'adb shell input swipe 320 410 320 410 ' + str(press_time)
+    start_x = int(random.random() * 200)
+    start_y = int(random.random() * 1000)
+    end_x = int(random.random() * 200) + 1500
+    end_y = int(random.random() * 1000)
+    cmd = 'adb shell input swipe %d %d %d %d ' % (start_x, start_y, end_x, end_y) + str(press_time)
     print(cmd)
     os.system(cmd)
 
